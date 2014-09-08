@@ -1,0 +1,207 @@
+html, body, #map
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+#borderContainer
+{
+    width: 95%;
+    height: 95%;
+}
+
+#leftPane
+{
+    width: 15%;
+}
+
+#legendPane
+{
+    padding: 15px;
+    border: solid black 1px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#HomeButton
+{
+    position: absolute;
+    top: 45%;
+    left: 40px;
+    z-index: 50;
+}
+
+#scale
+{
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    bottom: 20px;
+    right: 40px;
+    border: 1px solid black;
+    background-color: white;
+    padding: 15px;
+    position: absolute;
+    z-index: 50;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.HomeButton .home
+{
+    padding: 2px;
+    width: 30px;
+    height: 30px;
+    background-color: #666;
+    background-color: rgba(255,255,255,1.00);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    background-image: url("images/home.png") !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 1px solid black;
+}
+
+#BasemapMenu
+{
+    border: 1px solid black;
+    background-color: white;
+    padding: 15px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+    z-index: 50;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.legendItem
+{
+    font-weight: bold;
+}
+
+.symbol
+{
+    /*-webkit-border-radius: 25px; 		-moz-border-radius: 25px;*/
+    border-radius: 100%;
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
+}
+
+#legend
+{
+    margin-top: 25px;
+    margin-bottom: 50px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#lowestSymbol
+{
+    background-color: rgba(102,102,102,1.00);
+}
+
+#lowerSymbol
+{
+    background-color: rgba(45,206,38,1.00);
+}
+
+#mediumSymbol
+{
+    background-color: rgba(255,255,0,1.00);
+}
+
+#higherSymbol
+{
+    background-color: rgba(255,153,0,1.00);
+}
+
+#highestSymbol
+{
+    background-color: rgba(204,0,0,1.00);
+}
+
+
+.logo
+{
+    position: absolute;
+    z-index: 50;
+    left: 20px;
+    top: 5%;
+    display: block;
+    width: 20%;
+}
+
+#map_zoom_slider
+{
+    top: 30% !important;
+    left: 40px !important;
+}
+
+.goButton
+{
+    background-color: transparent;
+    background-image: url("images/go.png");
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    padding-left: 16px;
+    border: none;
+    cursor: pointer;
+    width: 2.2750775594622543950361944157187%; /*height: 2.8571428571428571428571428571429%;*/
+}
+
+.title
+{
+    text-align: center;
+    font-weight: bold;
+}
+
+#legendTitle
+{
+    font-size: larger;
+}
+
+#emergencyNumber
+{
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+    height: 3 8px;
+    line-height: 38px;
+}
+
+hr.orange
+{
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #DC6437;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+}
+
+hr.blue
+{
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #0591D2;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    padding-bottom: 10px;
+}
