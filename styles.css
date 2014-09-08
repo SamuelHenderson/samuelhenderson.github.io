@@ -1,0 +1,50 @@
+html, body, #map
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+#borderContainer
+{
+    width: 95%;
+    height: 95%;
+}
+
+#meta {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 300px;
+    height: 40px;
+    z-index: 40;
+    background: #fff;
+    color: #777;
+    padding: 5px;
+    border: 2px solid #666;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; 
+    font-family: arial;
+    font-size: 0.9em;
+  }
+  #meta h3 {
+    color: #666;
+    font-size: 1.1em;
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+  }
+  #loading { 
+    float: right;
+  }
+
+
+
+
+
+
+
+
+
