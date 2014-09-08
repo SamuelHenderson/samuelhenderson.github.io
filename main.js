@@ -6,6 +6,7 @@
 var map, graphicsLayer;
 require([
     "esri/map",
+    "esri/geometry/Extent",
     "esri/layers/KMLLayer",
     "dojo/parser",
     "dojo/dom-style",
@@ -15,6 +16,7 @@ require([
     "dojo/data/ItemFileReadStore",
     "dojo/domReady!"], function (
     Map,
+    Extent,
     KMLLayer,
     parser,
     domStyle,       
