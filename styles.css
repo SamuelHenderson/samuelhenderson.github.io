@@ -4,6 +4,28 @@ html, body, #map
     height: 100%;
     margin: 0;
     overflow: hidden;
+    font-family: Calibri;    
+}
+
+#errorText 
+{
+    color: #FF0000;
+}
+
+#header
+{
+    font-family: Calibri;
+    font-size: 4.5vw;
+    color: #0065A3;
+    border: 0px;
+}
+
+#CGC_Logo 
+{
+    width:10%;
+    height:10%;
+    vertical-align: middle;
+    margin-right: 1.5%;
 }
 
 #borderContainer
@@ -17,7 +39,7 @@ html, body, #map
     left: 20px;
     bottom: 20px;
     width: 300px;
-    height: 40px;
+    height: 80px;
     z-index: 40;
     background: #fff;
     color: #777;
@@ -28,18 +50,19 @@ html, body, #map
     border-radius: 5px; 
     font-family: arial;
     font-size: 0.9em;
+    /*overflow-style: auto;*/
+    overflow: auto;
   }
   #meta h3 {
     color: #666;
     font-size: 1.1em;
     padding: 0px;
     margin: 0px;
-    display: inline-block;
+    display: inline-block;    
   }
-  #loading { 
+  #meta-icon-span { 
     float: right;
   }
-
 
 
 

@@ -2,14 +2,25 @@
 //  Samuel Henderson, 2014-08-29
 //  Contains all javascript for the NPI Census Project
 
+// This global string variable has the URL to the CensusDataService
+var censusSiteUrl = "http://npi.ssmic.com/"
+var censusDataServiceLocation = censusSiteUrl + "/CensusDataService.asmx/"
+
 // Load our Dojo modules, initialize our google map and load our Topics combobox (the other comboboxes are loaded via selection changed events)
 var map, graphicsLayer;
 require([
     "esri/map",
     "esri/geometry/Extent",
     "esri/layers/KMLLayer",
+    "esri/symbols/TextSymbol",
+    "esri/renderers/SimpleRenderer",
+    "esri/layers/LabelLayer",
+
     "dojo/parser",
+    "dojo/dom-attr",
     "dojo/dom-style",
+    "dojo/dom",
+    "dojo/_base/fx",
     "dijit/layout/BorderContainer",
     "dijit/form/ComboBox",
     "dijit/layout/ContentPane",
@@ -18,11 +29,20 @@ require([
     Map,
     Extent,
     KMLLayer,
+    TextSymbol,
+    SimpleRenderer,
+    LabelLayer,
     parser,
-    domStyle,       
+    domAttr,
+    domStyle,
+    dom,
+    fx,
     ComboBox) {
 
         parser.parse();
+
+        //FadeInLoading();
+        domStyle.set("meta", "opacity", "0");
 
         map = new Map("map", {
             center: [-84.35, 46.533333],
@@ -33,40 +53,111 @@ require([
             extent: new Extent({ xmin: -9402143.628480503, ymin: 5859696.671480425, xmax: -9377454.468344426, ymax: 5872767.403317172, spatialReference: { wkid: 102100} })
         });
 
-        var kmlUrl = "https://dl.dropboxusercontent.com/u/37758746/PopulationAge_TotalPopulation_2011_CSD_TEST.kmz";
-        var kml = new KMLLayer(kmlUrl);
-        map.addLayer(kml);
-        kml.on("load", function () {
-            domStyle.set("meta", "display", "none");
+        var topic;
+        var variable;
+        var year;
+        var geography;
+
+        // Populate the Topics combobox and have it's Change event load the data for the variables combobox
+        PopulateTopicsComboBox();
+        var topicsBox = dijit.byId("selTopics")
+        topicsBox.on("Change", function (value) {
+            topic = value; //topic = topicsBox.store.getValue(topicsBox.item, "name")
+            PopulateVariablesComboBox(value);
         });
 
-//        var topic;
-//        var variable;
-//        var year;
+        // Have the Variables combobox Change event populate the Years combobox using the value selected from the Variables Combobox
+        // along with the value selected from the Topics ComboBox
+        var variablesBox = dijit.byId("selVariables")
+        variablesBox.on("Change", function (value) {
+            variable = value
+            PopulateYearsComboBox(value, topic);
+        });
 
-//        // Populate the Topics combobox and have it's Change event load the data for the variables combobox
-//        PopulateTopicsComboBox();
-//        var topicsBox = dijit.byId("selTopics")
-//        topicsBox.on("Change", function (value) {
-//            topic = value; //topic = topicsBox.store.getValue(topicsBox.item, "name")
-//            PopulateVariablesComboBox(value);
-//        });
+        // Have the Years combobox Change event populate the Geographies combobox using the value selected from the Years Combobox,
+        // the value selected from the Variables ComboBox, and the value selected from the Topics Combobox
+        var yearsBox = dijit.byId("selYears")
+        yearsBox.on("Change", function (value) {
+            year = value;
+            PopulateGeographiesComboBox(value, variable, topic);
+        });
 
-//        // Have the Variables combobox Change event populate the Years combobox using the value selected from the Variables Combobox
-//        // along with the value selected from the Topics ComboBox
-//        var variablesBox = dijit.byId("selVariables")
-//        variablesBox.on("Change", function (value) {            
-//            variable = value
-//            PopulateYearsComboBox(value, topic);
-//        });
+        // Have the Geographies combobox Change event load the KMZ file and show the loading window,
+        // the value selected from the Variables ComboBox, and the value selected from the Topics Combobox
+        var geographiesBox = dijit.byId("selGeographies")
+        geographiesBox.on("Change", function (value) {
+            geography = value;
+            var geoKMZ = (geography == "Census Division" ? "CD" : (geography == "Census Subdivision" ? "CSD" : "CT"));
+            var kmzPath = censusSiteUrl + "kmzdata/" + topic + "/" + variable + "/" + year + "/" + geography + "/"
+            var kmzFileName = topic + "_" + variable + "_" + year + "_" + geoKMZ + ".kmz";
+            var kmlURL = kmzPath + kmzFileName.replace(/\s/g, '');
+            LoadKMZ(encodeURI(kmlURL));
+            //LoadKMZ("http://npi.ssmic.com/kmzdata/Population%20Age/Total%20Population/2011/Census%20Subdivision/PopulationAge_TotalPopulation_2011_CSD.kmz");
+            //PopulateGeographiesComboBox(value, variable, topic);
+        });
 
-//        // Have the Years combobox Change event populate the Geographies combobox using the value selected from the Years Combobox,
-//        // the value selected from the Variables ComboBox, and the value selected from the Topics Combobox
-//        var yearsBox = dijit.byId("selYears")
-//        yearsBox.on("Change", function (value) {            
-//            year = value;
-//            PopulateGeographiesComboBox(value, variable, topic);
-//        });
+        function FadeInLoading() {
+            domStyle.set("meta-text", "color", "#777");
+            dojo.byId("meta-text").innerHTML = "Loading KML";
+            domStyle.set("meta-icon", "display", "block");
+            domStyle.set("meta", "opacity", 0);
+            domStyle.set("meta", "display", "block");
+
+            var fadeArgs = { node: "meta" };
+            fx.fadeIn(fadeArgs).play();
+        }
+
+        function FadeOutLoading() {
+            domStyle.set("meta", "opacity", "1");
+            var fadeArgs = { node: "meta" };
+            fx.fadeOut(fadeArgs).play();
+        }
+
+        function LoadKMZ(kmlURL) {
+            console.log("Attempting to load KMZ: '" + kmlURL + "'");
+            FadeInLoading();
+            var kml = new KMLLayer(kmlURL, { id: "kml" });
+            kml.setOpacity(0.5);
+            map.addLayer(kml);
+
+            kml.on("load", function () {
+                FadeOutLoading();
+
+                console.log("KMZ Loaded");
+
+                var layers = kml.getLayers();
+                var layer = layers[0];
+
+                // Center the KML's extent
+                var kmlExtent;
+                if (layer.graphics && layer.graphics.length > 0) {
+                    console.log("Getting Extent");
+                    var layerExtent = esri.graphicsExtent(layer.graphics);
+                    kmlExtent = layerExtent;
+                }
+                map.setExtent(kmlExtent);
+
+                // Set up Labeling
+                var censusLabel = new TextSymbol().setColor("#666");
+                censusLabel.font.setSize("14pt");
+                censusLabel.font.setFamily("arial");
+                censusLabelRenderer = new SimpleRenderer(censusLabel);
+                var labels = new LabelLayer({ id: "labels" });
+                // tell the label layer to label the countries feature layer 
+                // using the field named "admin"
+                labels.addFeatureLayer(layer, censusLabelRenderer, "{CSDNAME}");
+                // add the label layer to the map
+                map.addLayer(labels);
+            });
+
+            // Handle KML Loading Errors
+            kml.on("error", function (error) {
+                console.log(error);
+                domStyle.set("meta-icon", "display", "none");
+                domStyle.set("meta-text", "color", "red");
+                dojo.byId("meta-text").innerHTML = "Error loading KML: " + error.error.message;
+            });
+        }
 
     });
 
@@ -74,9 +165,8 @@ function PopulateTopicsComboBox() {
     //Populate the dropdown list box with unique values
     $.ajax({
         type: "POST",
-        contentType: "application/json; charset=utf-8",
-        //url: "http://devnpicensus.cgc.local/CensusDataService.asmx/GetTopics", 
-        url: "http://localhost:61056/CensusDataService.asmx/GetTopics",
+        contentType: "application/json; charset=utf-8",        
+        url: censusDataServiceLocation + "GetTopics",
         data: "{}",
         async: false,
         dataType: "json",
@@ -118,9 +208,8 @@ function PopulateVariablesComboBox(value) {
     console.log(value);
     $.ajax({
         type: "POST",
-        contentType: "application/json; charset=utf-8",
-        //url: "http://localhost:61056/CensusDataService.asmx/GetVariables",
-        url: "http://localhost:61056/CensusDataService.asmx/GetVariables",
+        contentType: "application/json; charset=utf-8",        
+        url: censusDataServiceLocation + "GetVariables",
         data: "{topic: '" + value + "'}",
         async: false,
         dataType: "json",
@@ -163,9 +252,8 @@ function PopulateYearsComboBox(value, topic) {
     console.log(value);
     $.ajax({
         type: "POST",
-        contentType: "application/json; charset=utf-8",
-        //url: "http://localhost:61056/CensusDataService.asmx/GetYears",
-        url: "http://localhost:61056/CensusDataService.asmx/GetYears",
+        contentType: "application/json; charset=utf-8",        
+        url: censusDataServiceLocation + "GetYears",
         data: "{variable: '" + value + "', topic: '" + topic + "'}",
         async: false,
         dataType: "json",
@@ -210,8 +298,7 @@ function PopulateGeographiesComboBox(value, variable, topic) {
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        //url: "http://localhost:61056/CensusDataService.asmx/GetGeographies",
-        url: "http://localhost:61056/CensusDataService.asmx/GetGeographies",
+        url: censusDataServiceLocation + "GetGeographies",
         data: "{year: '" + value + "', variable: '" + variable + "', topic: '" + topic + "'}",
         async: false,
         dataType: "json",
