@@ -221,6 +221,7 @@ require([
 			map.addLayer(featureLayer);
 			
 			// create a text symbol to define the style of labels
+			var statesColor = new Color("#666");
 			var statesLabel = new TextSymbol().setColor(statesColor);
 			statesLabel.font.setSize("14pt");
 			statesLabel.font.setFamily("arial");
