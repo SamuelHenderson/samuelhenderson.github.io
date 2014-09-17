@@ -4,34 +4,51 @@
     <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.6/js/dojo/dijit/themes/claro/claro.css">  
     <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.6" type="text/javascript"></script>  
     <script type="text/javascript">  
-      dojo.require("esri.map");  
-      dojo.require("esri.layers.FeatureLayer");  
+		var map;
+		var featureLayer;
+		require([
+			"esri/map", 
+			"esri/geometry/Extent",
+			"esri/layers/FeatureLayer",
+
+			"esri/symbols/SimpleLineSymbol",
+			"esri/symbols/SimpleFillSymbol",
+			"esri/symbols/TextSymbol",
+			"esri/renderers/SimpleRenderer",
+
+			"esri/layers/LabelLayer",
+
+			"esri/Color",
+			"dojo/domReady!"
+		], function(
+			Map, Extent, FeatureLayer,
+			SimpleLineSymbol, SimpleFillSymbol, TextSymbol, SimpleRenderer,
+			LabelLayer,
+			Color
+		) {  
 	  
-      var map = null;  
-      var featureLayer = null;  
+			  
   
-      function init() {  
+			  
   
-        map = new esri.Map("map", {  
-          extent: new esri.geometry.Extent({  
-            xmin: -1040766.5771306533,  
-            ymin: 7095190.713541364,  
-            xmax: -766204.7715304322,  
-            ymax: 7278028.085199418,  
-            spatialReference: {  
-              wkid: 102100  
-            }  
-          })  
-        });  
-  
-        // for webmaps  
-        var arcgisURL = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"  
-        // 102100   
-        var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer(arcgisURL);  
-        map.addLayer(tiledMapServiceLayer);  
-  
-  
-      }  
+			map = new Map("map", {  
+				extent: new esri.geometry.Extent({  
+					xmin: -1040766.5771306533,  
+					ymin: 7095190.713541364,  
+					xmax: -766204.7715304322,  
+					ymax: 7278028.085199418,  
+					spatialReference: {  
+						wkid: 102100  
+					}  
+				})  
+			});  
+
+			// for webmaps  
+			var arcgisURL = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"  
+			// 102100   
+			var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer(arcgisURL);  
+			map.addLayer(tiledMapServiceLayer);    
+			  
   
   
   
@@ -158,9 +175,8 @@
   
         document.write("MinX: " + map.extent.xmin + " MinY: " + map.extent.ymin + " MaxX: " + map.extent.xmax + " MaxY: " + map.extent.ymax);  
   
-      }  
-  
-      dojo.addOnLoad(init);  
+      }    
+	});
     </script>  
   </head>  
     
