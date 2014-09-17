@@ -107,7 +107,7 @@ require([
                 var kmlURL = kmzPath + kmzFileName.replace(/\s/g, '');
                 //LoadKMZ(encodeURI(kmlURL));
 				//LoadLabels(encodeURI(kmlURL));
-                LoadKMZ("kmzdata/doc.kml");
+                //LoadKMZ("kmzdata/doc.kml");
 				LoadLabels("kmzdata/doc.json");
                 //LoadKMZ("http://npi.ssmic.com/kmzdata/Population%20Age/Total%20Population/2011/Census%20Subdivision/PopulationAge_TotalPopulation_2011_CSD.kmz");
                 //PopulateGeographiesComboBox(value, variable, topic);
@@ -210,11 +210,30 @@ require([
 				}]
 			};
 			
+			var labelField = "text";			
 			var featureLayer = new esri.layers.FeatureLayer(featureCollection, {
-				mode: esri.layers.FeatureLayer.MODE_ONDEMAND
+				mode: esri.layers.FeatureLayer.MODE_ONDEMAND,
+				outfields: [labelField]
 			});
 			
+			console.log("logging featureLayer");
+			console.log(featureLayer);
 			map.addLayer(featureLayer);
+			
+			// create a text symbol to define the style of labels
+			var statesLabel = new TextSymbol().setColor(statesColor);
+			statesLabel.font.setSize("14pt");
+			statesLabel.font.setFamily("arial");
+			statesLabelRenderer = new SimpleRenderer(statesLabel);
+			var labels = new LabelLayer({ id: "labels" });
+			// tell the label layer to label the countries feature layer 
+			// using the field named "admin"
+			labels.addFeatureLayer(featureLayer, statesLabelRenderer, "${" + labelField + "}");
+			// add the label layer to the map
+			map.addLayer(labels);
+			
+			
+			
 			
 		}
 
