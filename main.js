@@ -114,7 +114,7 @@ require([
             if (value != "Select a Geography") {
                 geography = value;
                 var geoKML = (geography == "Census Division" ? "CD" : (geography == "Census Subdivision" ? "CSD" : "CT"));
-                var kmlPath = censusSiteUrl + "kmzdata/" + topic + "/" + variable + "/" + year + "/" + geography + "/"
+                var kmlPath =  "kmzdata/" + topic + "/" + variable + "/" + year + "/" + geography + "/"
                 var kmlFileName = topic + "_" + variable + "_" + year + "_" + geoKML + ".kml";
 				var legendFileName = topic + "_" + variable + "_" + year + "_" + geoKML + ".png";
                 var kmlURL = kmlPath + kmlFileName.replace(/\s/g, '');
