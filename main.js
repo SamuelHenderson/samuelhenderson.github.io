@@ -162,6 +162,7 @@ require([
 			// add the label layer to the map
 			//map.addLayer(labels);
 			console.log("logging label layer");
+			console.log(labels);
 			// Add to map
 			
 		}
