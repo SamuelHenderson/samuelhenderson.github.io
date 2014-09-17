@@ -131,6 +131,58 @@ require([
             fx.fadeOut(fadeArgs).play();
         }
 		
+		//function LoadLabels(url){
+		//	console.log("Attempting to load JSON: '" + url + "'");
+			
+		//	var geoJsonLayer = new GeoJsonLayer({
+		//		url: "kmzdata/doc.json"
+		//	});
+			
+		//	map.addLayer(geoJsonLayer);
+			
+		//	console.log("Added JSON Layer!");
+		//	console.log("Adding label");
+		//	var censusLabel = new TextSymbol().setColor("#666");
+		//	censusLabel.font.setSize("14pt");
+		//	censusLabel.font.setFamily("arial");
+		//	censusLabelRenderer = new SimpleRenderer(censusLabel);
+		//	var labels = new LabelLayer({ id: "labels" });
+			// tell the label layer to label the countries feature layer 
+			// using the field named "admin"
+		//	labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{ POP2006 }");
+			// add the label layer to the map
+		//	map.addLayer(labels);
+		//	console.log("Labels added!");
+			// Add to map
+			
+		//}
+		
+		//function LoadLabels(url){
+		//	console.log("Attempting to load JSON: '" + url + "'");
+			
+		//	var geoJsonLayer = new GeoJsonLayer({
+		//		url: "kmzdata/doc.json"
+		//	});
+			
+		//	map.addLayer(geoJsonLayer);
+			
+		//	console.log("Added JSON Layer!");
+		//	console.log("Adding label");
+		//	var censusLabel = new TextSymbol().setColor("#666");
+		//	censusLabel.font.setSize("14pt");
+		//	censusLabel.font.setFamily("arial");
+		//	censusLabelRenderer = new SimpleRenderer(censusLabel);
+		//	var labels = new LabelLayer({ id: "labels" });
+			// tell the label layer to label the countries feature layer 
+			// using the field named "admin"
+		//	labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{ POP2006 }");
+			// add the label layer to the map
+		//	map.addLayer(labels);
+		//	console.log("Labels added!");
+			// Add to map
+			
+		//}
+		
 		function LoadLabels(url){
 			console.log("Attempting to load JSON: '" + url + "'");
 			
@@ -138,9 +190,9 @@ require([
 				url: "kmzdata/doc.json"
 			});
 			
-			map.addLayer(geoJsonLayer);
+			//map.addLayer(geoJsonLayer);
 			
-			console.log("Added JSON Layer!");
+			//console.log("Added JSON Layer!");
 			console.log("Adding label");
 			var censusLabel = new TextSymbol().setColor("#666");
 			censusLabel.font.setSize("14pt");
