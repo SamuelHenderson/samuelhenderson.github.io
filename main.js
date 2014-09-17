@@ -116,7 +116,7 @@ require([
                 //LoadKMZ(encodeURI(kmlURL));
 				//LoadLabels(encodeURI(kmlURL));
                 //LoadKMZ("kmzdata/doc.kml");
-				LoadLabelsJSON("kmzdata/doc.json");
+				LoadLabels("kmzdata/doc.json");
                 //LoadKMZ("http://npi.ssmic.com/kmzdata/Population%20Age/Total%20Population/2011/Census%20Subdivision/PopulationAge_TotalPopulation_2011_CSD.kmz");
                 //PopulateGeographiesComboBox(value, variable, topic);
             }
