@@ -196,7 +196,7 @@ require([
 			
 			var featureCollection = {
 				layerDefinition: {
-					"geometryType": "esriGeometryPolyline",
+					"geometryType": "esriGeometryPoint",
 					"fields": [{
 						"name": "OBJECTID",
 						"type": "esriFieldTypeOID"
