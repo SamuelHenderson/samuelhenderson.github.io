@@ -13,6 +13,7 @@ require([
     "esri/geometry/Extent",
     "esri/layers/KMLLayer",
     "esri/symbols/TextSymbol",
+	"esri/symbols/SimpleMarkerSymbol",
     "esri/renderers/SimpleRenderer",
 	"esri/layers/FeatureLayer",
     "esri/layers/LabelLayer",
@@ -35,6 +36,7 @@ require([
     Extent,
     KMLLayer,
     TextSymbol,
+	SimpleMarkerSymbol,
     SimpleRenderer,
 	FeatureLayer,
     LabelLayer,
@@ -222,9 +224,14 @@ require([
 			
 			console.log("logging featureLayer");
 			console.log(featureLayer);
-			map.addLayer(featureLayer);
+			
 			
 			// create a text symbol to define the style of labels
+			var statesLine = new SimpleLineSymbol("solid", statesColor, 1.5);
+			var statesSMS = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255,0,0]), 1), new Color([0,255,0,0.25]));
+			var statesRenderer = new SimpleRenderer(statesSMS);
+			featureLayer.setRenderer(statesRenderer);
+			map.addLayer(featureLayer);
 			var statesColor = new Color("#666");
 			var statesLabel = new TextSymbol().setColor(statesColor);
 			statesLabel.font.setSize("14pt");
