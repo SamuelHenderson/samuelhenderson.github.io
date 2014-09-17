@@ -253,14 +253,14 @@ require([
 			var statesRenderer = new SimpleRenderer(statesSymbol);
 			
 			var defaultSymbol = new SimpleMarkerSymbol();  
-			var renderer = new esri.renderer.UniqueValueRenderer(defaultSymbol, "Name");  
+			var renderer = new esri.renderer.UniqueValueRenderer(statesSymbol, "Name");  
 	  
 			//add symbol for each possible value  
-			renderer.addValue("Point1", new SimpleMarkerSymbol().setColor(new Color([255, 0, 0, 0.0])));  
+			renderer.addValue("Point1", new SimpleMarkerSymbol().setColor(new Color([255, 0, 0, 0.5])));  
 			//renderer.addValue("Point2", new SimpleMarkerSymbol().setColor(new Color([0, 255, 0, 0.5])));  
 			//renderer.addValue("Point3", new SimpleMarkerSymbol().setColor(new Color([0, 0, 255, 0.5])));  
 			//renderer.addValue("Point4", new SimpleMarkerSymbol().setColor(new Color([255, 0, 255, 0.5])));  
-			featureLayer.setRenderer(statesRenderer);  
+			featureLayer.setRenderer(render);  
 	  
 	  
 			map.addLayer(featureLayer);  
