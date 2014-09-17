@@ -54,8 +54,11 @@
           id: "states",
           outFields: [labelField] 
         });
-        //states.setRenderer(statesRenderer);
+        states.setRenderer(statesRenderer);
         map.addLayer(states);
+		
+		console.log("logging States");
+		console.log(states)
 
         // create a text symbol to define the style of labels
         var statesLabel = new TextSymbol().setColor(statesColor);
