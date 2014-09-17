@@ -214,6 +214,8 @@ require([
 				mode: esri.layers.FeatureLayer.MODE_ONDEMAND
 			});
 			
+			map.addLayer(featureLayer);
+			
 		}
 
         function LoadKMZ(kmlURL) {
