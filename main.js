@@ -20,6 +20,7 @@ require([
     "esri/layers/LabelLayer",
     "esri/dijit/Legend",
 	"esri/Color",
+	"esri/Tasks/FeatureSet",
 	"./src/geojsonlayer.js",
 
     "dojo/_base/array",
@@ -44,6 +45,7 @@ require([
     LabelLayer,
     Legend,
 	Color,
+	FeatureSet,
 	GeoJsonLayer,
 
     arrayUtils,
