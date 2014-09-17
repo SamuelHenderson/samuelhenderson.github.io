@@ -143,6 +143,8 @@ require([
 				console.log("Added JSON Layer!");
 				
                 // Set up Labeling
+				console.log("Outputting JSON");
+				console.log(geoJsonLayer);
                 var censusLabel = new TextSymbol().setColor("#666");
                 censusLabel.font.setSize("14pt");
                 censusLabel.font.setFamily("arial");
