@@ -251,11 +251,12 @@ require([
 			var statesLine = new SimpleLineSymbol("solid", statesColor, 1.5);
 			var statesSymbol = new SimpleFillSymbol("solid", statesLine, null);
 			var statesRenderer = new SimpleRenderer(statesSymbol);
-	  	  
-			//var renderer = new esri.renderer.UniqueValueRenderer(defaultSymbol, "Name");  
+			
+			var defaultSymbol = new SimpleMarkerSymbol();  
+			var renderer = new esri.renderer.UniqueValueRenderer(defaultSymbol, "Name");  
 	  
 			//add symbol for each possible value  
-			//statesRenderer.addValue("Point1", new SimpleMarkerSymbol().setColor(new Color([255, 0, 0, 0.5])));  
+			renderer.addValue("Point1", new SimpleMarkerSymbol().setColor(new Color([255, 0, 0, 0.0])));  
 			//renderer.addValue("Point2", new SimpleMarkerSymbol().setColor(new Color([0, 255, 0, 0.5])));  
 			//renderer.addValue("Point3", new SimpleMarkerSymbol().setColor(new Color([0, 0, 255, 0.5])));  
 			//renderer.addValue("Point4", new SimpleMarkerSymbol().setColor(new Color([255, 0, 255, 0.5])));  
