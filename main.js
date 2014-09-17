@@ -184,28 +184,35 @@ require([
 		//}
 		
 		function LoadLabels(url){
-			console.log("Attempting to load JSON: '" + url + "'");
+			console.log("Attempting to label JSON");
 			
-			var geoJsonLayer = new GeoJsonLayer({
-				url: "kmzdata/doc.json"
+			var featureCollection = {
+				layerDefinition: {
+					"geometryType": "esriGeometryPolyline",
+					"fields": [{
+						"name": "OBJECTID",
+						"type": "esriFieldTypeOID"
+					},{
+						"name": "text",
+						"type": "esriFieldTypeString"
+					},{
+						"name": "address",
+						"type": "esriFieldTypeString"
+					}]
+				},
+				features: [{
+					"attributes": {
+						OBJECTID : 1, 
+						text : 'TEST TEST TEST', 
+						address : '538 Korah Road', 
+					},
+					"geometry": { "x": -80.12468662, "y": 40.42756484 }
+				}]
+			};
+			
+			var featureLayer = new esri.layers.FeatureLayer(featureCollection, {
+				mode: esri.layers.FeatureLayer.MODE_ONDEMAND
 			});
-			
-			//map.addLayer(geoJsonLayer);
-			
-			//console.log("Added JSON Layer!");
-			console.log("Adding label");
-			var censusLabel = new TextSymbol().setColor("#666");
-			censusLabel.font.setSize("14pt");
-			censusLabel.font.setFamily("arial");
-			censusLabelRenderer = new SimpleRenderer(censusLabel);
-			var labels = new LabelLayer({ id: "labels" });
-			// tell the label layer to label the countries feature layer 
-			// using the field named "admin"
-			labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{ POP2006 }");
-			// add the label layer to the map
-			map.addLayer(labels);
-			console.log("Labels added!");
-			// Add to map
 			
 		}
 
