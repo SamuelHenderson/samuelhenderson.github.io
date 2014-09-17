@@ -232,8 +232,29 @@ require([
 			var statesColor = new Color("#666");
 			var statesLine = new SimpleLineSymbol("solid", statesColor, 1.5);
 			var statesSMS = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_SQUARE, 10, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255,0,0]), 1), new Color([0,255,0,0.25]));
-			var statesRenderer = new SimpleRenderer(statesSMS);
-			featureLayer.setRenderer(statesRenderer);			
+			var simpleJson = {
+				"type": "simple",
+				"label": "",
+				"description": "",
+				"symbol": {
+					"color": [210,105,30,191],
+					"size": 6,
+					"angle": 0,
+					"xoffset": 0,
+					"yoffset": 0,
+					"type": "esriSMS",
+					"style": "esriSMSCircle",
+					"outline": {
+						"color": [0,0,128,255],
+						"width": 0,
+						"type": "esriSLS",
+						"style": "esriSLSSolid"
+					}
+				}
+			}
+			
+			var rend = new SimpleRenderer(simpleJson);
+			featureLayer.setRenderer(rend);			
 			map.addLayer(featureLayer);
 			console.log("logging featureLayer");
 			console.log(featureLayer);
