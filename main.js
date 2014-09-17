@@ -121,11 +121,11 @@ require([
                 var kmlURL = kmlPath + kmlFileName.replace(/\s/g, '');
 				var legendURL = kmlPath + legendFileName.replace(/\s/g, '');
                 LoadKMZ(encodeURI(kmlURL));
-				LoadLegend(encodeURI(legendURL));
+				//LoadLegend(encodeURI(legendURL));
 				//LoadLabels(encodeURI(kmlURL));
                 //LoadKMZ("kmzdata/doc.kml");
 				//LoadLabels("kmzdata/doc.json");
-				LoadLegend("kmzdata/doc.png");
+				//LoadLegend("kmzdata/doc.png");
                 //LoadKMZ("http://npi.ssmic.com/kmzdata/Population%20Age/Total%20Population/2011/Census%20Subdivision/PopulationAge_TotalPopulation_2011_CSD.kmz");
                 //PopulateGeographiesComboBox(value, variable, topic);
             }
