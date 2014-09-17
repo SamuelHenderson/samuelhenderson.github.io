@@ -6,6 +6,7 @@
     <script type="text/javascript">  
       dojo.require("esri.map");  
       dojo.require("esri.layers.FeatureLayer");  
+	  
       var map = null;  
       var featureLayer = null;  
   
@@ -127,8 +128,8 @@
   
   
         map.addLayer(featureLayer);  
-		
-		var statesLabel = new TextSymbol().setColor(statesColor);
+		var statesColor = new Color("#666");		
+		var statesLabel = new esri.symbol.TextSymbol().setColor(statesColor);
         statesLabel.font.setSize("14pt");
         statesLabel.font.setFamily("arial");
         statesLabelRenderer = new SimpleRenderer(statesLabel);
