@@ -16,7 +16,7 @@ require([
     "esri/renderers/SimpleRenderer",
     "esri/layers/LabelLayer",
     "esri/dijit/Legend",
-	"/src/geojsonlayer",
+	"./src/geojsonlayer.js",
 
     "dojo/_base/array",
     "dojo/parser",
@@ -132,7 +132,7 @@ require([
         }
 		
 		function LoadLabels(url){
-			console.log("Attempting to load JSON: '" + jsonURL + "'");
+			console.log("Attempting to load JSON: '" + url + "'");
 			
 			var geoJsonLayer = new GeoJsonLayer({
 				url: url
