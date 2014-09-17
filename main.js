@@ -130,11 +130,12 @@ require([
             var fadeArgs = { node: "meta" };
             fx.fadeOut(fadeArgs).play();
         }
-		function LoadLabels(jsonURL){
+		
+		function LoadLabels(url){
 			console.log("Attempting to load JSON: '" + jsonURL + "'");
 			
 			var geoJsonLayer = new GeoJsonLayer({
-				url: jsonURL
+				url: url
 			});
 			            
 			geoJsonLayer.on("update-end", function (e) {
