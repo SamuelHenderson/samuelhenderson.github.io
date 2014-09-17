@@ -112,7 +112,7 @@ require([
         var geographiesBox = dijit.byId("selGeographies")
         geographiesBox.on("Change", function (value) {
             if (value != "Select a Geography") {
-                geography = value;
+				geography = value;
                 var geoKML = (geography == "Census Division" ? "CD" : (geography == "Census Subdivision" ? "CSD" : "CT"));
                 //var kmlPath = censusSiteUrl + "kmzdata/" + topic + "/" + variable + "/" + year + "/" + geography + "/"
 				var kmlPath = "http://samuelhenderson.github.io/kmzdata/" + topic + "/" + variable + "/" + year + "/" + geography + "/"
