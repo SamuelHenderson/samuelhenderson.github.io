@@ -259,7 +259,7 @@ require([
 			//renderer.addValue("Point2", new SimpleMarkerSymbol().setColor(new Color([0, 255, 0, 0.5])));  
 			//renderer.addValue("Point3", new SimpleMarkerSymbol().setColor(new Color([0, 0, 255, 0.5])));  
 			//renderer.addValue("Point4", new SimpleMarkerSymbol().setColor(new Color([255, 0, 255, 0.5])));  
-			featureLayer.setRenderer(renderer);  
+			featureLayer.setRenderer(statesRenderer);  
 	  
 	  
 			map.addLayer(featureLayer);  
