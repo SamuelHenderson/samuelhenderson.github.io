@@ -120,7 +120,7 @@ require([
 				var legendFileName = topic + "_" + variable + "_" + year + "_" + geoKML + ".png";
                 var kmlURL = kmlPath + kmlFileName.replace(/\s/g, '');
 				var legendURL = kmlPath + legendFileName.replace(/\s/g, '');
-                LoadKMZ(encodeURI(kmlURL));
+                //LoadKMZ(encodeURI(kmlURL));
 				LoadLegend(encodeURI(legendURL));
 				//LoadLabels(encodeURI(kmlURL));
                 //LoadKMZ("kmzdata/doc.kml");
