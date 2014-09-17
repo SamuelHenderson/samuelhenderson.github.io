@@ -14,8 +14,10 @@ require([
     "esri/layers/KMLLayer",
     "esri/symbols/TextSymbol",
     "esri/renderers/SimpleRenderer",
+	"esri/layers/FeatureLayer",
     "esri/layers/LabelLayer",
     "esri/dijit/Legend",
+	"esri/Color",
 	"./src/geojsonlayer.js",
 
     "dojo/_base/array",
@@ -34,8 +36,10 @@ require([
     KMLLayer,
     TextSymbol,
     SimpleRenderer,
+	FeatureLayer,
     LabelLayer,
     Legend,
+	Color,
 	GeoJsonLayer,
 
     arrayUtils,
