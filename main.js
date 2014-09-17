@@ -158,7 +158,8 @@ require([
         function LoadKMZ(kmlURL) {
             console.log("Attempting to load KMZ: '" + kmlURL + "'");
             FadeInLoading();
-            var kml = new KMLLayer(kmlURL, { id: "kml" });
+            //var kml = new KMLLayer(kmlURL, { id: "kml" });
+			var kml = new KMLLayer("http://samuelhenderson.github.io/kmzdata/doc.kml", { id: "kml" });
             kml.setOpacity(0.75);
             map.addLayer(kml);
 
