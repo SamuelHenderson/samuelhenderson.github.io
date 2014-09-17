@@ -86,32 +86,31 @@
 					}  
 				}]  
 			};
-
 			
 			var fs = new esri.tasks.FeatureSet(jsonFS);  
 			var fsCollect = new esri.tasks.FeatureSet();  
 			var featuresList = fs.features;  
 	  
 			var layerDefinition = {  
-			  "displayFieldName": "Name",  
-			  "geometryType": "esriGeometryPoint",  
-			  "spatialReference": {  
-				"wkid": 102100  
-			  },  
-			  "fields": [{  
-				"name": "ObjectID",  
-				"alias": "ObjectID",  
-				"type": "esriFieldTypeOID"  
-			  }, {  
-				"name": "Name",  
-				"type": "esriFieldTypeString",  
-				"alias": "Name"  
-			  }]  
+				"displayFieldName": "Name",  
+				"geometryType": "esriGeometryPoint",  
+				"spatialReference": {  
+					"wkid": 102100  
+				},  
+				"fields": [{  
+					"name": "ObjectID",  
+					"alias": "ObjectID",  
+					"type": "esriFieldTypeOID"  
+				}, {  
+					"name": "Name",  
+					"type": "esriFieldTypeString",  
+					"alias": "Name"  
+				}]  
 			}  
 	  
 			var featureCollection = {  
-			  layerDefinition: layerDefinition,  
-			  featureSet: fs  
+				layerDefinition: layerDefinition,  
+				featureSet: fs  
 			};  
 			
 			var labelField = "Name";
@@ -119,9 +118,8 @@
 			//alert(featureCollection.featureSet.features.length);  
 			console.log(featureCollection);  
 			featureLayer = new FeatureLayer(featureCollection, { outFields: [labelField]});  
-			var defaultSymbol = new esri.symbol.SimpleMarkerSymbol();  
-	  
-	  
+			var defaultSymbol = new SimpleMarkerSymbol();  
+	  	  
 			var renderer = new esri.renderer.UniqueValueRenderer(defaultSymbol, "Name");  
 	  
 			//add symbol for each possible value  
