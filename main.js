@@ -4,7 +4,7 @@
 
 // This global string variable has the URL to the CensusDataService
 var censusSiteUrl = "http://npi.ssmic.com/"
-var censusDataServiceLocation = censusSiteUrl + "/CensusDataService.asmx/"
+var censusDataServiceLocation = censusSiteUrl + "CensusDataService.asmx/"
 
 // Load our Dojo modules, initialize our google map and load our Topics combobox (the other comboboxes are loaded via selection changed events)
 var map;
