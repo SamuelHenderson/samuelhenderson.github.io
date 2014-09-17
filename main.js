@@ -137,27 +137,33 @@ require([
 			var geoJsonLayer = new GeoJsonLayer({
 				url: "kmzdata/doc.json"
 			});
+			
+			map.addLayer(geoJsonLayer);
+			
+			console.log("Added JSON Layer!");
+			console.log("Adding label");
+			var censusLabel = new TextSymbol().setColor("#666");
+			censusLabel.font.setSize("14pt");
+			censusLabel.font.setFamily("arial");
+			censusLabelRenderer = new SimpleRenderer(censusLabel);
+			var labels = new LabelLayer({ id: "labels" });
+			// tell the label layer to label the countries feature layer 
+			// using the field named "admin"
+			labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{ POP2006 }");
+			// add the label layer to the map
+			map.addLayer(labels);
 			            
 			geoJsonLayer.on("update-end", function (e) {
 				//map.setExtent(e.target.extent.expand(1.2));
-				console.log("Added JSON Layer!");
+				
 				
                 // Set up Labeling
 				console.log("Outputting JSON");
 				console.log(geoJsonLayer);
-                var censusLabel = new TextSymbol().setColor("#666");
-                censusLabel.font.setSize("14pt");
-                censusLabel.font.setFamily("arial");
-                censusLabelRenderer = new SimpleRenderer(censusLabel);
-                var labels = new LabelLayer({ id: "labels" });
-                // tell the label layer to label the countries feature layer 
-                // using the field named "admin"
-                labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{POP2006}");
-                // add the label layer to the map
-                map.addLayer(labels);
+                
 			});
 			// Add to map
-			map.addLayer(geoJsonLayer);
+			
 		}
 
         function LoadKMZ(kmlURL) {
