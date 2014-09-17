@@ -135,7 +135,7 @@ require([
 			console.log("Attempting to load JSON: '" + url + "'");
 			
 			var geoJsonLayer = new GeoJsonLayer({
-				url: url
+				url: "kmzdata/doc.json"
 			});
 			            
 			geoJsonLayer.on("update-end", function (e) {
