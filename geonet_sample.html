@@ -127,6 +127,20 @@
   
   
         map.addLayer(featureLayer);  
+		
+		var statesLabel = new TextSymbol().setColor(statesColor);
+        statesLabel.font.setSize("14pt");
+        statesLabel.font.setFamily("arial");
+        statesLabelRenderer = new SimpleRenderer(statesLabel);
+        var labels = new LabelLayer({ id: "labels" });
+        // tell the label layer to label the countries feature layer 
+        // using the field named "admin"
+        labels.addFeatureLayer(featureLayer, statesLabelRenderer, "{Name}");
+        // add the label layer to the map
+		console.log("Logging labels");
+        console.log(labels);
+        map.addLayer(labels);
+		
         dojo.connect(map, 'onClick', function (e) {  
           console.log(e.mapPoint.x + " " + e.mapPoint.y);  
         });  
