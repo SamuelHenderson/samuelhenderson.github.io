@@ -105,8 +105,10 @@ require([
                 var kmzPath = censusSiteUrl + "kmzdata/" + topic + "/" + variable + "/" + year + "/" + geography + "/"
                 var kmzFileName = topic + "_" + variable + "_" + year + "_" + geoKMZ + ".kmz";
                 var kmlURL = kmzPath + kmzFileName.replace(/\s/g, '');
-                LoadKMZ(encodeURI(kmlURL));
-				LoadLabels(encodeURI(kmlURL));
+                //LoadKMZ(encodeURI(kmlURL));
+				//LoadLabels(encodeURI(kmlURL));
+                LoadKMZ("kmzdata/doc.kml");
+				LoadLabels("kmzdata/doc.json");
                 //LoadKMZ("http://npi.ssmic.com/kmzdata/Population%20Age/Total%20Population/2011/Census%20Subdivision/PopulationAge_TotalPopulation_2011_CSD.kmz");
                 //PopulateGeographiesComboBox(value, variable, topic);
             }
@@ -132,7 +134,7 @@ require([
 			console.log("Attempting to load JSON: '" + jsonURL + "'");
 			
 			var geoJsonLayer = new GeoJsonLayer({
-				url: "http://samuelhenderson.github.io/kmzdata/doc.json"
+				url: jsonURL
 			});
 			            
 			geoJsonLayer.on("update-end", function (e) {
