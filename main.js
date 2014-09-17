@@ -116,7 +116,7 @@ require([
                 //LoadKMZ(encodeURI(kmlURL));
 				//LoadLabels(encodeURI(kmlURL));
                 //LoadKMZ("kmzdata/doc.kml");
-				LoadLabels("kmzdata/doc.json");
+				LoadLabelsJSON("kmzdata/doc.json");
                 //LoadKMZ("http://npi.ssmic.com/kmzdata/Population%20Age/Total%20Population/2011/Census%20Subdivision/PopulationAge_TotalPopulation_2011_CSD.kmz");
                 //PopulateGeographiesComboBox(value, variable, topic);
             }
@@ -139,31 +139,31 @@ require([
             fx.fadeOut(fadeArgs).play();
         }
 		
-		//function LoadLabels(url){
-		//	console.log("Attempting to load JSON: '" + url + "'");
+		function LoadLabelsJSON(url){
+			console.log("Attempting to load JSON: '" + url + "'");
 			
-		//	var geoJsonLayer = new GeoJsonLayer({
-		//		url: "kmzdata/doc.json"
-		//	});
+			var geoJsonLayer = new GeoJsonLayer({
+				url: "kmzdata/doc.json"
+			});
 			
-		//	map.addLayer(geoJsonLayer);
+			map.addLayer(geoJsonLayer);
 			
-		//	console.log("Added JSON Layer!");
-		//	console.log("Adding label");
-		//	var censusLabel = new TextSymbol().setColor("#666");
-		//	censusLabel.font.setSize("14pt");
-		//	censusLabel.font.setFamily("arial");
-		//	censusLabelRenderer = new SimpleRenderer(censusLabel);
-		//	var labels = new LabelLayer({ id: "labels" });
+			console.log("Added JSON Layer!");
+			console.log("Adding label");
+			var censusLabel = new TextSymbol().setColor("#666");
+			censusLabel.font.setSize("14pt");
+			censusLabel.font.setFamily("arial");
+			censusLabelRenderer = new SimpleRenderer(censusLabel);
+			var labels = new LabelLayer({ id: "labels" });
 			// tell the label layer to label the countries feature layer 
 			// using the field named "admin"
-		//	labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{ POP2006 }");
+			labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{ POP2006 }");
 			// add the label layer to the map
-		//	map.addLayer(labels);
-		//	console.log("Labels added!");
+			map.addLayer(labels);
+			console.log("Labels added!");
 			// Add to map
 			
-		//}
+		}
 		
 		//function LoadLabels(url){
 		//	console.log("Attempting to load JSON: '" + url + "'");
@@ -223,10 +223,7 @@ require([
 				mode: esri.layers.FeatureLayer.MODE_ONDEMAND,
 				outfields: [labelField]
 			});
-			
-			
-			
-			
+							
 			
 			// create a text symbol to define the style of labels
 			var statesColor = new Color("#666");
