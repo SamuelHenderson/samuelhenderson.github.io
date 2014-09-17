@@ -206,7 +206,7 @@ require([
 						text : 'TEST TEST TEST', 
 						address : '538 Korah Road', 
 					},
-					"geometry": { "x": -80.12468662, "y": 40.42756484 }
+					"geometry": { "x": -84.35, "y": 46.533333 }
 				}]
 			};
 			
