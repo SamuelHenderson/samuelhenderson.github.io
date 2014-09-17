@@ -1,0 +1,158 @@
+<html>  
+    
+  <head>  
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.6/js/dojo/dijit/themes/claro/claro.css">  
+    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.6" type="text/javascript"></script>  
+    <script type="text/javascript">  
+      dojo.require("esri.map");  
+      dojo.require("esri.layers.FeatureLayer");  
+      var map = null;  
+      var featureLayer = null;  
+  
+      function init() {  
+  
+        map = new esri.Map("map", {  
+          extent: new esri.geometry.Extent({  
+            xmin: -1040766.5771306533,  
+            ymin: 7095190.713541364,  
+            xmax: -766204.7715304322,  
+            ymax: 7278028.085199418,  
+            spatialReference: {  
+              wkid: 102100  
+            }  
+          })  
+        });  
+  
+        // for webmaps  
+        var arcgisURL = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"  
+        // 102100   
+        var tiledMapServiceLayer = new esri.layers.ArcGISTiledMapServiceLayer(arcgisURL);  
+        map.addLayer(tiledMapServiceLayer);  
+  
+  
+      }  
+  
+  
+  
+      function createFeatureLayer() {  
+        var jsonFS = {  
+          "geometryType": "esriGeometryPoint",  
+          "features": [  
+      {  
+            "attributes": {  
+              "Name": "Point1",  
+              "ObjectID": 1  
+            },  
+            "geometry": {  
+              "x": -958520.3346958433,  
+              "y": 7120873.555045171  
+            }  
+          },  
+      {  
+            "attributes": {  
+              "Name": "Point2",  
+              "ObjectID": 2  
+            },  
+            "geometry": {  
+              "x": -803811.7894467209,  
+              "y": 7122708.0437240143  
+  
+            }  
+          },  
+      {  
+            "attributes": {  
+              "Name": "Point3",  
+              "ObjectID": 3  
+            },  
+            "geometry": {  
+              "x": -782409.4215268819,  
+              "y": 7208317.51540337  
+  
+            }  
+          },  
+      {  
+            "attributes": {  
+              "Name": "Point4",  
+              "ObjectID": 4  
+            },  
+            "geometry": {  
+              "x": -1017529.720531971,  
+              "y": 7189666.8805017965  
+  
+            }  
+          }  
+    ]  
+        };  
+        var fs = new esri.tasks.FeatureSet(jsonFS);  
+        var fsCollect = new esri.tasks.FeatureSet();  
+        var featuresList = fs.features;  
+  
+        var layerDefinition = {  
+          "displayFieldName": "Name",  
+          "geometryType": "esriGeometryPoint",  
+          "spatialReference": {  
+            "wkid": 102100  
+          },  
+          "fields": [{  
+            "name": "ObjectID",  
+            "alias": "ObjectID",  
+            "type": "esriFieldTypeOID"  
+          }, {  
+            "name": "Name",  
+            "type": "esriFieldTypeString",  
+            "alias": "Name"  
+          }]  
+        }  
+  
+        var featureCollection = {  
+          layerDefinition: layerDefinition,  
+          featureSet: fs  
+        };  
+  
+  
+        //alert(featureCollection.featureSet.features.length);  
+        console.log(featureCollection);  
+        featureLayer = new esri.layers.FeatureLayer(featureCollection);  
+        var defaultSymbol = new esri.symbol.SimpleMarkerSymbol();  
+  
+  
+        var renderer = new esri.renderer.UniqueValueRenderer(defaultSymbol, "Name");  
+  
+        //add symbol for each possible value  
+        renderer.addValue("Point1", new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([255, 0, 0, 0.5])));  
+        renderer.addValue("Point2", new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([0, 255, 0, 0.5])));  
+        renderer.addValue("Point3", new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([0, 0, 255, 0.5])));  
+        renderer.addValue("Point4", new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([255, 0, 255, 0.5])));  
+        featureLayer.setRenderer(renderer);  
+  
+  
+        map.addLayer(featureLayer);  
+        dojo.connect(map, 'onClick', function (e) {  
+          console.log(e.mapPoint.x + " " + e.mapPoint.y);  
+        });  
+  
+      }  
+  
+      function checkNoRecords() {  
+        if (featureLayer != null) {  
+          alert("Number of records " + featureLayer.graphics.length);  
+        } else alert("Feature Layer is null");  
+      }  
+  
+      function getExtent() {  
+  
+        document.write("MinX: " + map.extent.xmin + " MinY: " + map.extent.ymin + " MaxX: " + map.extent.xmax + " MaxY: " + map.extent.ymax);  
+  
+      }  
+  
+      dojo.addOnLoad(init);  
+    </script>  
+  </head>  
+    
+  <body class='claro'>  
+    <div id="map" style="width:900px; height:600px; border:1px solid #000;"></div>  
+    <button onclick="createFeatureLayer()">Create Feature Layer</button>  
+    <button onclick="checkNoRecords()">Check number of records in featurelayer</button>  
+  </body>  
+  
+</html>  
