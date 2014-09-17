@@ -1,35 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Data Layer: Simple</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script>
-var map;
-function initialize() {
-  // Create a simple map.
-  map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 4,
-    center: {lat: -28, lng: 137.883}
-  });
-
-  // Load a GeoJSON from the same server as our demo.
-  map.data.loadGeoJson('http://samuelhenderson.github.io/geojsontest.json');
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
+<head>
+    <title>NPI Census Site</title>
+    <link rel="Stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="http://js.arcgis.com/3.10/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">
+    <script type="text/javascript" src="http://js.arcgis.com/3.10/"></script>
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">        dojoConfig = { parseOnLoad: true }</script>
+    <script type="text/javascript" src="main.js">
     </script>
-  </head>
-  <body>
-    <div id="map-canvas"></div>
-  </body>
+</head>
+<body class="claro">
+    <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:true, liveSplitters:false"
+        id="borderContainer">
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', splitter:false"
+            id="header">
+            <img id="CGC_Logo" src="images/CGC_Logo.png" />Northern Ontario Census / NHS Catalog
+        </div>
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:false, region:'leading'"
+            style="width: 250px;">
+            <select data-dojo-type="dijit/form/ComboBox" id="selTopics" name="TopicSelection">
+                <option selected>Select a Topic</option>
+            </select>
+            <br />
+            <br />
+            <select data-dojo-type="dijit/form/ComboBox" id="selVariables" name="VariableSelection">
+                <option selected>Select a Variable</option>
+            </select>
+            <br />
+            <br />
+            <select data-dojo-type="dijit/form/ComboBox" id="selYears" name="YearSelection">
+                <option selected>Select a Year</option>
+            </select>
+            <br />
+            <br />
+            <select data-dojo-type="dijit/form/ComboBox" id="selGeographies" name="GeographySelection">
+                <option selected>Select a Geography</option>
+            </select>
+
+
+        </div>
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:false, region:'center'">
+            <div id="map">
+                <div id="meta" style="display: none;">
+                    <span id="meta-icon-span">
+                        <img id="meta-icon" src="images/loading_black.gif" />
+                    </span>
+                    <h3>
+                        <span id="meta-text">
+                            Loading map data
+                        </span>
+                    </h3>
+                </div>                
+            </div>
+        </div>
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:false, region:'trailing'"
+            style="width: 200px;">
+            <div id="legendDiv">
+            
+            </div>
+        </div>
+    </div>
+</body>
 </html>
