@@ -148,8 +148,9 @@ require([
 			
 			map.addLayer(geoJsonLayer);
 			
-			console.log("Added JSON Layer!");
-			console.log("Adding label");
+			console.log("logging geoJSONLayer");
+			console.log(geoJsonLayer);
+							
 			var censusLabel = new TextSymbol().setColor("#666");
 			censusLabel.font.setSize("14pt");
 			censusLabel.font.setFamily("arial");
@@ -159,8 +160,8 @@ require([
 			// using the field named "admin"
 			labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{ POP2006 }");
 			// add the label layer to the map
-			map.addLayer(labels);
-			console.log("Labels added!");
+			//map.addLayer(labels);
+			console.log("logging label layer");
 			// Add to map
 			
 		}
