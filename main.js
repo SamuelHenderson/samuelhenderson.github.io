@@ -152,16 +152,7 @@ require([
 			labels.addFeatureLayer(geoJsonLayer, censusLabelRenderer, "{ POP2006 }");
 			// add the label layer to the map
 			map.addLayer(labels);
-			            
-			geoJsonLayer.on("update-end", function (e) {
-				//map.setExtent(e.target.extent.expand(1.2));
-				
-				
-                // Set up Labeling
-				console.log("Outputting JSON");
-				console.log(geoJsonLayer);
-                
-			});
+			console.log("Labels added!");
 			// Add to map
 			
 		}
