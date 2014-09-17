@@ -276,7 +276,7 @@ require([
 			console.log("Logging labels");
 			console.log(labels);
 			console.log("Adding labels to the map");
-			map.addLayer(labels);			
+			//map.addLayer(labels);			
 			console.log("labels added");
 		}
 
