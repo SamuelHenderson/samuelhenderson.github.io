@@ -120,7 +120,7 @@ require([
                 var kmlURL = kmlPath + kmlFileName.replace(/\s/g, '');
 				var legendURL = kmlPath + legendFileName.replace(/\s/g, '');
                 LoadKMZ(encodeURI(kmlURL));
-				LoadKMZ(encodeURI(legendURL));
+				LoadLegend(encodeURI(legendURL));
 				//LoadLabels(encodeURI(kmlURL));
                 //LoadKMZ("kmzdata/doc.kml");
 				//LoadLabels("kmzdata/doc.json");
