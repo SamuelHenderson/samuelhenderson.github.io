@@ -273,9 +273,9 @@ require([
 			labels.addFeatureLayer(featureLayer, statesLabelRenderer, "{Name}");
 			// add the label layer to the map
 			console.log("Logging labels");
-			console.log(labels);
-			map.addLayer(labels);
-																
+			//console.log(labels);
+			map.addLayer(labels);			
+			console.log("layers added");
 		}
 
         function LoadKMZ(kmlURL) {
