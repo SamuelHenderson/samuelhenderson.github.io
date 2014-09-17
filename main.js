@@ -140,7 +140,7 @@ require([
 			            
 			geoJsonLayer.on("update-end", function (e) {
 				//map.setExtent(e.target.extent.expand(1.2));
-				console.log()"Added JSON Layer!");
+				console.log("Added JSON Layer!");
 			});
 			// Add to map
 			map.addLayer(geoJsonLayer);
