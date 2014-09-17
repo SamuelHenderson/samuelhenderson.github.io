@@ -16,6 +16,7 @@ require([
     "esri/renderers/SimpleRenderer",
     "esri/layers/LabelLayer",
     "esri/dijit/Legend",
+	"./src/geojsonlayer",
 
     "dojo/_base/array",
     "dojo/parser",
@@ -35,6 +36,7 @@ require([
     SimpleRenderer,
     LabelLayer,
     Legend,
+	GeoJsonLayer,
 
     arrayUtils,
     parser,
@@ -104,6 +106,7 @@ require([
                 var kmzFileName = topic + "_" + variable + "_" + year + "_" + geoKMZ + ".kmz";
                 var kmlURL = kmzPath + kmzFileName.replace(/\s/g, '');
                 LoadKMZ(encodeURI(kmlURL));
+				LoadLabels(encodeURI(kmlURL));
                 //LoadKMZ("http://npi.ssmic.com/kmzdata/Population%20Age/Total%20Population/2011/Census%20Subdivision/PopulationAge_TotalPopulation_2011_CSD.kmz");
                 //PopulateGeographiesComboBox(value, variable, topic);
             }
@@ -125,6 +128,20 @@ require([
             var fadeArgs = { node: "meta" };
             fx.fadeOut(fadeArgs).play();
         }
+		function LoadLabels(jsonURL){
+			console.log("Attempting to load JSON: '" + jsonURL + "'");
+			
+			var geoJsonLayer = new GeoJsonLayer({
+				url: "http://samuelhenderson.github.io/kmzdata/doc.json"
+			});
+			            
+			geoJsonLayer.on("update-end", function (e) {
+				//map.setExtent(e.target.extent.expand(1.2));
+				console.log()"Added JSON Layer!");
+			});
+			// Add to map
+			map.addLayer(geoJsonLayer);
+		}
 
         function LoadKMZ(kmlURL) {
             console.log("Attempting to load KMZ: '" + kmlURL + "'");
@@ -154,16 +171,16 @@ require([
                 map.setExtent(kmlExtent);
 
                 // Set up Labeling
-                var censusLabel = new TextSymbol().setColor("#666");
-                censusLabel.font.setSize("14pt");
-                censusLabel.font.setFamily("arial");
-                censusLabelRenderer = new SimpleRenderer(censusLabel);
-                var labels = new LabelLayer({ id: "labels" });
+                //var censusLabel = new TextSymbol().setColor("#666");
+                //censusLabel.font.setSize("14pt");
+                //censusLabel.font.setFamily("arial");
+                //censusLabelRenderer = new SimpleRenderer(censusLabel);
+                //var labels = new LabelLayer({ id: "labels" });
                 // tell the label layer to label the countries feature layer 
                 // using the field named "admin"
-                labels.addFeatureLayer(layer, censusLabelRenderer, "{CSD NAME}");
+                //labels.addFeatureLayer(layer, censusLabelRenderer, "{CSD NAME}");
                 // add the label layer to the map
-                map.addLayer(labels);
+                //map.addLayer(labels);
 
                 // Add Legend
                 //console.log(layer);
