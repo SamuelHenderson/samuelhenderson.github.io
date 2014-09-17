@@ -235,6 +235,7 @@ require([
 			// using the field named "admin"
 			labels.addFeatureLayer(featureLayer, statesLabelRenderer, "${" + labelField + "}");
 			// add the label layer to the map
+			console.log(labels);
 			map.addLayer(labels);
 			
 			
