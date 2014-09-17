@@ -16,7 +16,7 @@ require([
     "esri/renderers/SimpleRenderer",
     "esri/layers/LabelLayer",
     "esri/dijit/Legend",
-	"./src/geojsonlayer",
+	"/src/geojsonlayer",
 
     "dojo/_base/array",
     "dojo/parser",
