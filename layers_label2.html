@@ -45,6 +45,11 @@
 			  extent: bbox
 			});
 			
+			// for webmaps  
+			var arcgisURL = "http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer"  
+			// 102100   
+			var tiledMapServiceLayer = new ArcGISTiledMapServiceLayer(arcgisURL);  
+			map.addLayer(tiledMapServiceLayer);    
 			
 			var jsonFS = {  
 				"geometryType": "esriGeometryPoint",  

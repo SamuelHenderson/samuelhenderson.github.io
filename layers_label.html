@@ -38,7 +38,8 @@
         // load the map centered on the United States
         var bbox = new Extent({"xmin":-1940058,"ymin":-814715,"xmax":1683105,"ymax":1446096,"spatialReference":{"wkid":102003}});
         map = new Map("map", {
-          extent: bbox
+          extent: bbox,
+		  basemap: "topo"
         });
 
         var labelField = "STATE_NAME";
