@@ -54,7 +54,7 @@
           id: "states",
           outFields: [labelField] 
         });
-        states.setRenderer(statesRenderer);
+        //states.setRenderer(statesRenderer);
         map.addLayer(states);
 
         // create a text symbol to define the style of labels
@@ -67,6 +67,7 @@
         // using the field named "admin"
         labels.addFeatureLayer(states, statesLabelRenderer, "{" + labelField + "}");
         // add the label layer to the map
+		console.log("Logging labels");
         console.log(labels);
         map.addLayer(labels);
         
